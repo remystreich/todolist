@@ -1,0 +1,47 @@
+/* Style de la modal */
+.modal {
+    display: none; /* Cachée par défaut */
+    position: fixed; /* Position fixe pour rester au-dessus de la page */
+    z-index: 1; /* Placez la modal au-dessus de tout */
+    left: 0;
+    top: 0;
+    width: 100%; /* Largeur de la modal */
+    height: 100%; /* Hauteur de la modal */
+    overflow: auto; /* Permet de scroller si le contenu est trop grand */
+    background-color: rgba(0,0,0,0.4); /* Fonds foncé semi-transparent */
+  }
+  
+  /* Style de la modal-content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Centrez la modal verticalement et horizontalement */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Largeur de la modal-content */
+  }
+  
+  /* Style pour le bouton de fermeture */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  /* Lorsque l'utilisateur survole le bouton de fermeture */
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+#user{
+    display: none;
+}
+#team{
+    display: none;
+}
+#task{
+    display: none;
+}
