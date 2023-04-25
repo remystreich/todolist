@@ -19,6 +19,7 @@ if(!empty($_POST)){
             $_SESSION["status"] = $user_filter[0] -> status;
             $_SESSION["team"] = $user_filter[0] -> team;
             echo "logged in"; 
+            sleep(1);
             header("Location: ../pages/dashboard.php"); //redirection vers le dashboard
         }
         else {

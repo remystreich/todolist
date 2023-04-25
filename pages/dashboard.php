@@ -111,7 +111,7 @@ $todo_filter = array_filter($array_todo, function ($todo) {
                                 <button>Envoyer</button>
                             </div>
                             <div id="task">
-                                <label for="taskName">Nouvelle tâche</label>
+                                <label for="taskName">Nom</label>
                                 <input type="text" name="taskName" id="taskName">
                                 <label for="duration">Durée de la tâche</label>
                                 <input type="number" name="duration" id="duration">
@@ -139,6 +139,7 @@ $todo_filter = array_filter($array_todo, function ($todo) {
                 '</select>';
 
                 if ($_SESSION['status'] == 1) { // si l'utilisateur est l'admin, possibilité de choisir la team à qui attribuer la task
+                    include('./');
                     echo '<select name="selectTeam" id="selectTeam">
                             <option value="">--Pour quelle équipe--</option>';
                     foreach ($team_filter as $team) {
@@ -161,7 +162,8 @@ $todo_filter = array_filter($array_todo, function ($todo) {
             echo '
             </div>'
             ?>
-            <div >
+            
+            <div>
                 <?php
                 //affichage des taches journalieres
                 foreach ($todo_filter as $todo) {
@@ -178,7 +180,7 @@ $todo_filter = array_filter($array_todo, function ($todo) {
 
                 //affichage des team de l'entreprise
                 echo '<div id="teamCard">';
-                if ($_SESSION['status'] == 1){
+                if ($_SESSION['status'] == 1) {
                     foreach ($team_filter as $team) {
                         echo '<div class="teamCard">
                         <h3>' . $team->name . '</h3>
@@ -188,7 +190,7 @@ $todo_filter = array_filter($array_todo, function ($todo) {
                 };
                 echo '</div><div id="userCard">';
                 //affichage des collaborateurs
-                if ($_SESSION['status'] == 1){
+                if ($_SESSION['status'] == 1) {
                     foreach ($user_filter as $user) {
                         echo '<div class="userCard">
                         <h3>' . $user->name . '</h3>
@@ -200,12 +202,12 @@ $todo_filter = array_filter($array_todo, function ($todo) {
                 };
                 echo '</div><div id="taskCard">';
                 //affichage des taches
-                if ($_SESSION['status'] == 1){
+                if ($_SESSION['status'] == 1) {
                     foreach ($task_filter as $task) {
                         echo '<div class="taskCard">
                         <h3>' . $task->name . '</h3>
                         <p>Durée:' . $task->duration . ' </p>
-                        <a href="../controllers/modif_task.php?taskName=' . $task->name . '">Modifier</a>
+                        <a href="./modif_task.php?taskName=' . $task->name . '">Modifier</a>
                         <a href="../controllers/remove_task.php?taskName=' . $task->name . '">Effacer</a>
                         </div>';
                     };
