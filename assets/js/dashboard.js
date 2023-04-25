@@ -59,5 +59,25 @@ select.addEventListener('change', (event) => {
 
   }
 });
+//bouton voir team
+function displayTeam() {
+  document.querySelector('#teamCard').style.display = "block";
+  document.querySelector('#taskCard').style.display = "none";
+  document.querySelector('#userCard').style.display = "none";
+}
+//bouton voir user
+function displayUser() {
+  document.querySelector('#teamCard').style.display = "none";
+  document.querySelector('#taskCard').style.display = "none";
+  document.querySelector('#userCard').style.display = "block";
+}
+//bouton voir task
+function displayTask() {
+  document.querySelector('#teamCard').style.display = "none";
+  document.querySelector('#taskCard').style.display = "block";
+  document.querySelector('#userCard').style.display = "none";
+}
+
+
 
 

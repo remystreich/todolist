@@ -1,14 +1,14 @@
-/* Style de la modal */
+
 .modal {
     display: none; /* Cachée par défaut */
     position: fixed; /* Position fixe pour rester au-dessus de la page */
     z-index: 1; /* Placez la modal au-dessus de tout */
     left: 0;
     top: 0;
-    width: 100%; /* Largeur de la modal */
-    height: 100%; /* Hauteur de la modal */
+    width: 100%; 
+    height: 100%; 
     overflow: auto; /* Permet de scroller si le contenu est trop grand */
-    background-color: rgba(0,0,0,0.4); /* Fonds foncé semi-transparent */
+    background-color: rgba(0,0,0,0.4); 
   }
   
   /* Style de la modal-content */
@@ -44,4 +44,14 @@
 }
 #task{
     display: none;
+}
+
+#userCard{
+  display: none;
+}
+#taskCard{
+  display: none;
+}
+#teamCard{
+  display: none;
 }

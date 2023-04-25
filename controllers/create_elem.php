@@ -35,8 +35,6 @@ if ($_POST['select'] == "user") {
 if ($_POST['select'] == "task" ) { 
     $task_name = $_POST['taskName']; //nom de la task = valeur du form
     $task_duration = $_POST['duration']; //durée du task
-    $task_priority = 0; 
-    $task_number = 0;
     $new_task = ["companyId"=>  $_SESSION["companyId"],'name'=>$task_name, 'duration'=>$task_duration, 'priority'=>$task_priority , 'task_number'=>$task_number];
     $task_json = json_decode(file_get_contents('../json/task.json'));
     array_push($task_json, $new_task);
