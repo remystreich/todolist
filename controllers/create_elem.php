@@ -1,5 +1,10 @@
 <?php //formulaire de creation de team, utilisateur, taches
 session_start();
+////récupérer les team de l'entreprise
+$array_team = json_decode(file_get_contents('../json/team.json'));
+$team_filter = array_filter($array_team, function ($team) {
+    return $team->companyId == $_SESSION['companyId'];
+});
 //si le select est sur team
 if ($_POST['select'] == "team") { 
     $team_name = $_POST['teamName']; //nom de la team = valeur du form
@@ -17,12 +22,19 @@ if ($_POST['select'] == "user") {
     $user_name = $_POST['userName']; //nom de user = valeur du form
     $user_password = password_hash($_POST['userPassword'], PASSWORD_DEFAULT); //hash la valeur du password
     $user_id = uniqid(); //id du user
-    $user_team = $_POST['teamSelect']; //nom de la team du user= valeur du form
+    $user_team = $_POST['teamSelect']; //id de la team du user= valeur du form
+    //récupération du nom de la team
+    $teamName = "";
+    foreach ($team_filter as  $team) {
+        if ($team->id == $_POST['teamSelect']){
+            $teamName = $team->name;
+        };
+    };
     $user_status = 0; //status de l'utilisateur = 0 (pas de privilege)
     if ($_POST['status'] == 'on') { // si la checkbox est cochée statut = 2 (peut agir sur les taches journalieres)
         $user_status = 2;
     }
-    $new_user = ['id' =>$user_id, "companyId"=>  $_SESSION["companyId"], 'name'=>$user_name, 'password'=>$user_password, 'team'=>$user_team , 'status'=>$user_status]; //creation d'un tableau avec les valeurs du user
+    $new_user = ['id' =>$user_id, "companyId"=>  $_SESSION["companyId"], 'name'=>$user_name, 'password'=>$user_password, 'team'=>$user_team , 'status'=>$user_status, 'teamName'=>$teamName]; //creation d'un tableau avec les valeurs du user
     $user_json = json_decode(file_get_contents('../json/user.json')); //decodage du json des utilisateurs
     array_push($user_json, $new_user); //stockage du user dans le json
     $user_json = json_encode($user_json);

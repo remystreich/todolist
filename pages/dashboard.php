@@ -56,20 +56,7 @@ $todo_filter = array_filter($array_todo, function ($todo) {
         <div>
             <?php
             if ($_SESSION['status'] == 1) { //disponible uniquement pour l'admin
-                echo '<div id="adminBar">
-                <div></div>
-                <div>
-                    <div>
-                        <button onclick="displayTeam()">Voir teams</button>
-                    </div>
-                    <div>
-                        <button onclick="displayTask()">Voir tâches</button>
-                    </div>
-                    <div>
-                        <button onclick="displayUser()">Voir utilisateurs</button>
-                    </div>
-                </div>
-            </div>';
+                include('./menu_admin.php');
             }
             echo
             '<div>';
@@ -96,13 +83,11 @@ $todo_filter = array_filter($array_todo, function ($todo) {
                                 <input type="checkbox" name="status" id="status">
                                 <select name="teamSelect" id="teamSelect">
                                     <option value="">--Dans quelle équipe?--</option>';
-                // liste des team qui s'incrémente à partir du json
-                $array_team = json_decode(file_get_contents('../json/team.json'));
-                foreach ($array_team as $team) {
-                    echo '<option value="' . $team->id . '">' . $team->name . '</option>';
-                };
+                                    foreach ($team_filter as $team) {
+                                        echo '<option value="' . $team->id . '">' . $team->name . '</option>';
+                                    };
 
-                echo '</select>
+                        echo '</select>
                                 <button>Envoyer</button>
                             </div>
                             <div id="team">
@@ -192,10 +177,12 @@ $todo_filter = array_filter($array_todo, function ($todo) {
                 //affichage des collaborateurs
                 if ($_SESSION['status'] == 1) {
                     foreach ($user_filter as $user) {
+                      
                         echo '<div class="userCard">
                         <h3>' . $user->name . '</h3>
                         <p>Statut:' . $user->status . ' </p>
-                        <a href="../controllers/modif_user.php?userId=' . $user->id . '">Modifier</a>
+                        <p>Team:' . $user->teamName . ' </p>
+                        <a href="./modif_user.php?userId=' . $user->id . '">Modifier</a>
                         <a href="../controllers/remove_user.php?userId=' . $user->id . '">Effacer</a>
                         </div>';
                     };

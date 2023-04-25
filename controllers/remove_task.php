@@ -1,7 +1,9 @@
 <?php
 $array_task = json_decode(file_get_contents('../json/task.json')); //récupérer et décoder sous forme de tableau le json des taches 
+//récupérer la task correspondante à l'élément à supprimer
 foreach ($array_task as $key => $task) {
     if ($task->name === $_GET['taskName']) {
+      //suppression de la task
       unset($array_task[$key]);
       $array_task = array_values($array_task);
     }
