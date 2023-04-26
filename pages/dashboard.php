@@ -20,7 +20,6 @@ $array_todo = json_decode(file_get_contents('../json/todo.json'));
 $todo_filter = array_filter($array_todo, function ($todo) {
     return $todo->selectTeam == $_SESSION['team'] && $todo->day == $_SESSION['day'];
 });
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -30,182 +29,146 @@ $todo_filter = array_filter($array_todo, function ($todo) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/subscribe.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
+
 </head>
 
-<body>
+<body class="bg-dark text-white">
     <header>
-        <h1>TodoList</h1>
+        <h1 class="text-center p-3 mb-5">TaskMaster</h1>
     </header>
-    <main>
-        <div>
-            <h2>Workspace</h2>
-            <form id="dateSelector" action="../controllers/date_select.php" method="get">
-                <input type="date" name="date" id="date">
-                <button>Choisir la date</button>
-            </form>
-            <?php //affichage des fonctionnalités selon les status
-            if ($_SESSION['status'] > 0) { //disponible a l'admin et au chef
-                echo '<button  onclick="openTaskModal()">Ajout de tâches</button>';
-            }
-            if ($_SESSION['status'] == 1) { //disponible uniquement pour l'admin
-                echo '<button  onclick="openModal()">Créer élément</button>';
-            }
-            ?>
-        </div>
-        <div>
-            <?php
-            if ($_SESSION['status'] == 1) { //disponible uniquement pour l'admin
-                include('./menu_admin.php');
-            }
-            echo
-            '<div>';
-            if ($_SESSION['status'] == 1) {
-                echo '<div id="myModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close" onclick="closeModal()">&times;</span>
-                        <h2>Création d\'un nouvel élément</h2>
-                        <form action="../controllers/create_elem.php" method="post">
-                            <label for="select"></label>
-                            <select name="select" id="select">
-                                <option value="">--Que voulez vous créer--</option>
-                                <option value="team">Nouvelle équipe</option>
-                                <option value="user">Nouvel utilisateur</option>
-                                <option value="task">Nouvelle tâche</option>
-
-                            </select>
-                            <div id="user">
-                                <label for="userName">Nom d\'utilisateur</label>
-                                <input type="text" name="userName" id="userName">
-                                <label for="userPassword">Mot de passe</label>
-                                <input type="password" name="userPassword" id="userPassword">
-                                <label for="status">Contrôle des tâches ?</label>
-                                <input type="checkbox" name="status" id="status">
-                                <select name="teamSelect" id="teamSelect">
-                                    <option value="">--Dans quelle équipe?--</option>';
-                                    foreach ($team_filter as $team) {
-                                        echo '<option value="' . $team->id . '">' . $team->name . '</option>';
-                                    };
-
-                        echo '</select>
-                                <button>Envoyer</button>
-                            </div>
-                            <div id="team">
-                                <label for="teamName">Nom d\'équipe</label>
-                                <input type="text" name="teamName" id="teamName">
-                                <button>Envoyer</button>
-                            </div>
-                            <div id="task">
-                                <label for="taskName">Nom</label>
-                                <input type="text" name="taskName" id="taskName">
-                                <label for="duration">Durée de la tâche</label>
-                                <input type="number" name="duration" id="duration">
-                                <button>Envoyer</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>';
-            }
-
-            if ($_SESSION['status'] > 0) {
-                echo '
-                <div id="taskModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close" onclick="closeTaskModal()">&times;</span>
-                        <h2>Ajout de Tâches</h2>
-                        <form action="../controllers/dashboard.php" method="post">
-                            <select name="todoName" id="todo">
-                                <option value="">--Nouvelle tâche--</option>';
-                // récupération de la liste des taches par rapport au json
-                foreach ($task_filter as $task) {
-                    echo '<option value="' . $task->name . '">' . $task->name . '</option>';
-                }
-                echo
-                '</select>';
-
-                if ($_SESSION['status'] == 1) { // si l'utilisateur est l'admin, possibilité de choisir la team à qui attribuer la task
-                    include('./');
-                    echo '<select name="selectTeam" id="selectTeam">
-                            <option value="">--Pour quelle équipe--</option>';
-                    foreach ($team_filter as $team) {
-                        echo ' <option value="' . $team->id . '">' . $team->name . '</option>';
-                    }
-                    '</select>';
-                };
-                echo
-                '<label for="number">Nombre de fois à effectuer</label>
-                            <input type="number" name="number" id="number" placeholder="Nombre">
-                            <label for="priorityOrder">Ordre de priorité</label>
-                            <input type="number" name="priorityOrder" id="priorityOrder">
-                            <label for="day">Quel jour?</label>
-                            <input type="date" name="day" id="day">
-                            <button>Envoyer</button>
-                        </form>
-                    </div>
-                </div>';
-            }
-            echo '
-            </div>'
-            ?>
-            
-            <div>
-                <?php
-                //affichage des taches journalieres
-                foreach ($todo_filter as $todo) {
-                    echo '<div class="todoCard">
-                            <h3>' . $todo->todoName . '</h3>
-                            <p>Nombre de fois à effectuer:' . $todo->number . ' </p>
-                            <p>Durée:' . $todo->totalDuration . ' </p>';
+    <main class="container-fluid ">
+        <div class="row">
+            <div class="row col-3 text-center">
+                <div class=" bg-body-secondary rounded-start border border-black   container-fluid pb-3">
+                    <h2 class="text-black p-2">Workspace</h2>
+                    <form class="gap-2 row bg-secondary mx-auto p-2 rounded mt-5 mb-4" id="dateSelector" action="../controllers/date_select.php" method="get">
+                        <input class="form-control" type="date" name="date" id="date">
+                        <button class="btn btn-outline-light col-8 mx-auto">Choisir la date</button>
+                    </form>
+                    <?php //affichage des fonctionnalités selon les status
                     if ($_SESSION['status'] > 0) { //disponible a l'admin et au chef
-                        echo '<a href="../controllers/remove_todo.php?todoName=' . $todo->todoName . '">Tâche terminée</a>';
+                        echo '<button class="btn btn-dark mb-4 mt-5" onclick="openTaskModal()">Ajout de tâches</button>';
                     }
-                    '</div>
-                        ';
-                }
 
-                //affichage des team de l'entreprise
-                echo '<div id="teamCard">';
-                if ($_SESSION['status'] == 1) {
-                    foreach ($team_filter as $team) {
-                        echo '<div class="teamCard">
-                        <h3>' . $team->name . '</h3>
-                        <a href="../controllers/remove_team.php?teamId=' . $team->id . '">Effacer</a>
-                        </div>';
+                    if ($_SESSION['status'] == 1) { //disponible uniquement pour l'admin
+                        echo '<button class="btn btn-dark mt-4 mb-5" onclick="openModal()">Créer élément</button>';
+                    }
+                    ?>
+                </div>
+            </div>
+
+            <div class="col-9">
+                <div class="bg-body-secondary p-2 rounded-end border border-black row myBar mb-4">
+                    <?php
+                    if ($_SESSION['status'] == 1) { //disponible uniquement pour l'admin
+                        include('./menu_admin.php');
+                    }
+                    ?>
+                </div>
+
+                <div>
+                    <?php
+                    if ($_SESSION['status'] == 1) {
+                        include('./modal_admin.php');
+                    }
+                    if ($_SESSION['status'] > 0) {
+                        include('./modal_addtask.php');
+                    }
+                    ?>
+                </div>
+                <div>
+                    <?php
+                    //affichage des taches journalieres
+                    echo '<div class="container-fluid">';
+                    foreach ($todo_filter as $todo) {
+                        echo '<div class="todoCard card mb-3 p-2 bg-info-subtle  ">
+                                    <div class="row g-0">
+                                        <div class="col-md-3">
+                                            <h3>' . $todo->todoName . '</h3>
+                                        </div>
+                                        <div class="col-md-4 row align-self-center">
+                                            <p class="col-8">Nombre de fois à effectuer:' . $todo->number . ' </p>
+                                        </div>
+                                        <div class="col-md-4 align-self-center">
+                                            <p >Durée:' . $todo->totalDuration . ' </p>
+                                        </div>
+                                        <div class="col-md-1 align-self-center">';
+                                        if ($_SESSION['status'] > 0) { //disponible a l'admin et au chef
+                                            echo '<button type="button" class=" btn btn-primary "><a class="text-light" href="../controllers/remove_todo.php?todoName=' . $todo->todoName . '">Tâche terminée</a></button>';
+                                        };
+                        echo '</div></div></div>';
                     };
-                };
-                echo '</div><div id="userCard">';
-                //affichage des collaborateurs
-                if ($_SESSION['status'] == 1) {
-                    foreach ($user_filter as $user) {
-                      
-                        echo '<div class="userCard">
-                        <h3>' . $user->name . '</h3>
-                        <p>Statut:' . $user->status . ' </p>
-                        <p>Team:' . $user->teamName . ' </p>
-                        <a href="./modif_user.php?userId=' . $user->id . '">Modifier</a>
-                        <a href="../controllers/remove_user.php?userId=' . $user->id . '">Effacer</a>
-                        </div>';
+                    echo '</div>';
+                    //affichage des team de l'entreprise
+                    echo '<div id="teamCard" class="container-fluid">';
+                    if ($_SESSION['status'] == 1) {
+                        foreach ($team_filter as $team) {
+                            echo '<div class="teamCard card mb-3 p-2 bg-info-subtle">
+                                        <div class="row g-0">
+                                            <div class="col-md-6">
+                                                <h3>' . $team->name . '</h3>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button type="button" class="btn btn-danger"><a href="../controllers/remove_team.php?teamId=' . $team->id . '">Effacer</a></button>
+                                            </div>
+                                        </div>
+                                  </div>';
+                        };
                     };
-                };
-                echo '</div><div id="taskCard">';
-                //affichage des taches
-                if ($_SESSION['status'] == 1) {
-                    foreach ($task_filter as $task) {
-                        echo '<div class="taskCard">
-                        <h3>' . $task->name . '</h3>
-                        <p>Durée:' . $task->duration . ' </p>
-                        <a href="./modif_task.php?taskName=' . $task->name . '">Modifier</a>
-                        <a href="../controllers/remove_task.php?taskName=' . $task->name . '">Effacer</a>
-                        </div>';
+                    echo '</div><div id="userCard" class="container-fluid">';
+                    //affichage des collaborateurs
+                    if ($_SESSION['status'] == 1) {
+                        foreach ($user_filter as $user) {
+                            echo '<div class="userCard card mb-3 p-2 bg-info-subtle">
+                                        <div class="row g-0">
+                                            <div class="col-md-4">
+                                                <h3>' . $user->name . '</h3>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <p>Statut:' . $user->status . ' </p>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <p>Team:' . $user->teamName . ' </p>
+                                            </div>
+                                            <div class="col-md-4 gx-4 d-flex justify-content-around">
+                                                <button type="button" class="btn btn-warning"><a href="./modif_user.php?userId=' . $user->id . '">Modifier</a></button>
+                                                <button type="button" class="btn btn-danger"><a href="../controllers/remove_user.php?userId=' . $user->id . '">Effacer</a></button>
+                                            </div>
+                                        </div>
+                                </div>';
+                        };
                     };
-                };
-                echo '</div>'
-                ?>
+                    echo '</div><div id="taskCard" class="container-fluid">';
+                    //affichage des taches
+                    if ($_SESSION['status'] == 1) {
+                        foreach ($task_filter as $task) {
+                            echo '<div class="taskCard card mb-3 p-2 bg-info-subtle ">
+                                        <div class="row g-0">
+                                            <div class="col-md-5">
+                                                <h4>' . $task->name . '</h4>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>Durée:' . $task->duration . ' </p>
+                                            </div>
+                                            <div class="col-md-4 gx-4 d-flex justify-content-around">
+                                                <button type="button" class="btn btn-warning"><a class="text-black" href="./modif_task.php?taskName=' . $task->name . '">Modifier</a></button>
+                                                <button type="button" class="btn btn-danger"><a class="text-white" href="../controllers/remove_task.php?taskName=' . $task->name . '">Effacer</a></button>
+                                            </div>
+                                        </div>
+                                 </div>';
+                        };
+                    };
+                    ?>
+                </div>
             </div>
         </div>
-
     </main>
     <script src="../assets/js/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
 </body>
 
 </html>
