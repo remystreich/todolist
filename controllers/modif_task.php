@@ -6,9 +6,12 @@ if (!empty($_POST)) {
     foreach ($tasks as $task) {
         if ($task->name == $_POST['name']) {
             //remplacer par les nouvelles valeurs du form
-            $task->name = $_POST['modifTaskName'];
-            $task->duration = $_POST['modifDuration'];
-            echo 'remcieuc';
+            if (!empty($_POST['modifTaskName'])){
+                $task->name = $_POST['modifTaskName'];
+            };
+            if (!empty($_POST['modifDuration'])){
+                $task->duration = $_POST['modifDuration'];
+            }    
         }
     }
     //réencodage du json et stockage

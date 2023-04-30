@@ -1,3 +1,4 @@
+
 // Fonction pour ouvrir les modal
 function openModal() {
   document.getElementById("myModal").style.display = "block";
@@ -28,7 +29,8 @@ let user = document.getElementById('user');
 let task = document.getElementById('task');
 
 ///Quand la valeur du select est changée écoute sa valeur
-select.addEventListener('change', (event) => {
+if (document.getElementById("select")) {
+select.addEventListener('change', () => {
   //si la valeur==team affiche le form correspondant
   if (select.value == "team") {
     user.style.display = "none";
@@ -59,6 +61,7 @@ select.addEventListener('change', (event) => {
 
   }
 });
+}
 //bouton voir team
 function displayTeam() {
   document.querySelector('#teamCard').style.display = "block";
@@ -80,4 +83,8 @@ function displayTask() {
 
 
 
+var alertList = document.querySelectorAll('.alert');
+                      alertList.forEach(function (alert) {
+                        new bootstrap.Alert(alert)
+                      })
 

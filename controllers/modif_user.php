@@ -6,9 +6,13 @@ if (!empty($_POST)) {
     foreach ($users as $user) {
         if ($user->id == $_POST['id']) {
             //stockage des nouvelles valeurs
-            $user->name = $_POST['modifUserName'];
+            if (!empty($_POST['modifUserName'])) {
+                $user->name = $_POST['modifUserName'];
+            }
+            if (!empty($_POST['modifUserPassword'])) {
+                $user->password = password_hash($_POST['modifUserPassword'], PASSWORD_DEFAULT);
+            }
             $user->status = $_POST['changeStatus'];
-            $user->password = password_hash($_POST['modifUserPassword'], PASSWORD_DEFAULT);
             $user->team = $_POST['teamSelect'];
         }
     }

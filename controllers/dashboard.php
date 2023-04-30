@@ -1,6 +1,7 @@
 <?php //form d'ajout de tache journaliere
 session_start();
-    if (!empty($_POST)) { //verification que le form n'est pas vide
+unset($_SESSION['day']);
+    if (!empty($_POST['todoName']) && !empty($_POST['number']) && !empty($_POST['priorityOrder']) && !empty($_POST['day'])) { //verification que le form n'est pas vide
         $task = $_POST; //recuperation des valeurs du formulaire
         if($_SESSION['status'] != 1){
             $task['selectTeam']= $_SESSION['team'];
@@ -11,6 +12,7 @@ session_start();
         });
         $tab_filter = array_values($tab_filter);
         $task['duration'] = $tab_filter[0]->duration;
+        $task['companyId'] = $tab_filter[0]->companyId;
         $task['totalDuration']= $task['number'] * $task['duration'];
         $array_todo = json_decode(file_get_contents('../json/todo.json')); //récupérer et décoder sous forme de tableau le json des taches journalieres
         array_push($array_todo, $task); //stocker les données du formulaire dans le tableau
@@ -19,4 +21,5 @@ session_start();
         header("Location: ../pages/dashboard.php"); 
         die();
     }
+    
     ?>
