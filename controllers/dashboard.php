@@ -21,5 +21,8 @@ unset($_SESSION['day']);
         header("Location: ../pages/dashboard.php"); 
         die();
     }
-    
+    else{
+        header("Location: ../pages/dashboard.php"); 
+        die();
+    }
     ?>

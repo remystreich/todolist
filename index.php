@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Accueil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
 
@@ -13,17 +13,18 @@
 
 <body class="bg-dark ">
     <header>
+
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top pt-3">
           <div class="container">
-            <button class="navbar-toggler hidden-lg-up" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-                aria-expanded="false" aria-label="Toggle navigation"></button>
+            <button class="navbar-toggler hidden-lg-up text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                aria-expanded="false" aria-label="Toggle navigation">Menu</button>
             <div class="collapse navbar-collapse" id="collapsibleNavId">
-              <ul class="navbar-nav offset-10">
+              <ul class="navbar-nav offset-md-10">
                 <li class="nav-item ">
-                  <a class="nav-link active text-primary shadow rounded" href="./pages/subscribe.php" aria-current="page">Inscription <span class="visually-hidden">(current)</span></a>
+                  <a class="nav-link active text-primary shadow rounded text-center" href="./pages/subscribe.php" aria-current="page">Inscription <span class="visually-hidden">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-primary shadow rounded ms-5" href="./pages/login.php">Connexion</a>
+                  <a class="nav-link text-primary shadow rounded ms-md-5 text-center" href="./pages/login.php">Connexion</a>
                 </li>
               </ul>
             </div>

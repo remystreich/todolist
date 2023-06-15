@@ -19,6 +19,7 @@ if(!empty($_POST['password'])&& !empty($_POST['name'])){
             $_SESSION["status"] = $user_filter[0]->status;
             $_SESSION["team"] = $user_filter[0]->team;
             $_SESSION['log']='<p class="text-success">Connecté</p>';
+            unset($_SESSION['day']);
             header("Location: ../pages/login.php"); //redirection vers le dashboard
         }
         else {

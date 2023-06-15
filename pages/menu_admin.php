@@ -1,5 +1,5 @@
 <div class=" " id="adminBar">
-    <div class="btn-group offset-6 col-6">
+    <div class="btn-group offset-md-6 col-md-6 col-12">
         
             <button class="btn btn-outline-dark" onclick="displayTeam()">Voir teams</button>
        

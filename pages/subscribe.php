@@ -18,7 +18,7 @@ session_start();
         <h1 class="text-center p-3">TaskMaster</h1>
     </header>
     <main class="container-fluid ">
-        <div class="container mx-auto text-center  col-5 my-container-form ">
+        <div class="container mx-auto text-center  col-lg-5 my-container-form ">
             <h2 class="m-4 ">Création d'un nouveau compte</h2>
             <div class="mt-3 fs-3 text-danger mb-5">
                 <?php

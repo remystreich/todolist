@@ -41,10 +41,10 @@ $todo_filter_admin = array_filter($array_todo, function ($todo) {
     <header>
         <h1 class="text-center p-3 mb-5">TaskMaster</h1>
     </header>
-    <main class="container-fluid ">
-        <div class="row">
-            <div class="row col-2 text-center">
-                <div class=" bg-body-secondary rounded-start border border-black   container-fluid pb-3">
+    <main class="container-fluid mx-auto">
+        <div class="row text-center mx-auto">
+            <div class="row col-lg-2 text-center mx-auto p-0">
+                <div class=" bg-body-secondary  border border-black  container-fluid pb-3 rounded">
                     <h2 class="text-black p-2">Workspace</h2>
                     <form class="gap-2 row bg-secondary mx-auto p-2 rounded mt-5 mb-4" id="dateSelector" action="../controllers/date_select.php" method="get">
                         <input class="form-control" type="date" name="date" id="date">
@@ -63,14 +63,16 @@ $todo_filter_admin = array_filter($array_todo, function ($todo) {
                 </div>
             </div>
 
-            <div class="col-10">
-                <div class="bg-body-secondary p-2 rounded-end border border-black row myBar mb-4">
+            <div class="col-md-10">
+               
                     <?php
                     if ($_SESSION['status'] == 1) { //disponible uniquement pour l'admin
+                       echo' <div class="bg-body-secondary p-2 rounded border border-black row myBar mb-4">';
                         include('./menu_admin.php');
+                        echo '</div>';
                     }
                     ?>
-                </div>
+                
 
                 <div>
                     <?php
@@ -95,18 +97,18 @@ $todo_filter_admin = array_filter($array_todo, function ($todo) {
                     ?>
                     <?php
                     //affichage des taches journalieres
-                    echo '<div class="container-fluid">';
+                    echo '<div class="container-fluid mt-3 mt-md-0">';
                     foreach ($todo_filter as $todo) {
                         echo '<div class="todoCard card mb-3 p-2 bg-info-subtle  ">
                                     <div class="row g-0">
                                         <div class="col-md-3">
                                             <h3>' . $todo->todoName . '</h3>
                                         </div>
-                                        <div class="col-md-4 row align-self-center">
-                                            <p class="col-8">Nombre de fois à effectuer:' . $todo->number . ' </p>
+                                        <div class="col-md-4 col-12 row align-self-center">
+                                            <p class="col-8 mx-auto">Nombre de fois à effectuer:' . $todo->number . ' </p>
                                         </div>
-                                        <div class="col-md-4 align-self-center">
-                                            <p >Durée:' . $todo->totalDuration . ' </p>
+                                        <div class="col-md-4 col-12 align-self-center">
+                                            <p class="mx-auto" >Durée:' . $todo->totalDuration . ' </p>
                                         </div>
                                         <div class="col-md-1 align-self-center">';
                         if ($_SESSION['status'] > 0) { //disponible a l'admin et au chef
