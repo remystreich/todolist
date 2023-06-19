@@ -30,7 +30,7 @@
             </div>
           </div>
         </nav>
-      <div class="pt-5 ps-5 mb-4 bg-light rounded-3">
+      <div class="pt-5 ps-md-5 mb-4 bg-light rounded-3">
         <div class="container-fluid py-5">
           <h1 class="display-5 fw-bold">Taskmaster</h1>
           <p class="col-md-8 fs-4">Taskmaster est une application permettant de gérer des listes de tâches au sein d'une entreprise ou d'un groupe. Elle vous permettra de gérer simplement et efficacement vos équipes, membres et listes de tâches journalières.</p>
