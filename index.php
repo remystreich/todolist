@@ -39,19 +39,19 @@
         </div>
     </header>
     <main class="container-fluid">
-        <div class="p-4 mb-4 bg-warning rounded-3 col-8 offset-1">
+        <div class="p-4 mb-4 bg-warning rounded-3 col-12 col-md-8 offset-md-1">
             <div class="container-fluid py-5">
               <h1 class="display-5 fw-bold">Gérez vos équipes</h1>
               <p class="col-md-8 fs-4">Créez simplement et rapidement des équipes aucquelles attribuer vos collaborateurs.</p>
             </div>
           </div>
-          <div class="p-4 mb-4 bg-primary rounded-3 col-8 me-4 offset-3 text-light">
+          <div class="p-4 mb-4 bg-primary rounded-3  me-4 col-12 col-md-8 offset-md-1">
             <div class="container-fluid py-5">
               <h1 class="display-5 fw-bold">Gérez vos collaborateurs</h1>
               <p class="col-md-8 fs-4">Créez des comptes pour vos collaborateurs et paramétrez leurs droits ainsi que leur team d'apparteance.</p>
             </div>
           </div>
-          <div class="p-4 mb-4 bg-warning rounded-3 col-8 offset-1">
+          <div class="p-4 mb-4 bg-warning rounded-3 col-12 col-md-8 offset-md-1">
             <div class="container-fluid py-5">
               <h1 class="display-5 fw-bold">Gérez vos tâches</h1>
               <p class="col-md-8 fs-4">Créez et paramétrez des tâches, que vos collaborateurs n'auront plus qu'à ajouter au planning de travail journalier.</p>
